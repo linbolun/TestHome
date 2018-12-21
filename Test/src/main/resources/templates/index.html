@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 th:text="${gender}"></h1>
+<div class="parents">
+	<div id="chliden">
+		<span style="display: none" th:text="${num}" id="num"></span>
+		<span th:if="${StringParam} eq ''">题目名称</span>
+		<span th:if="${StringParam} != ''" th:text="${StringParam}"></span>
+		<button id="submit" onclick="success()">提交</button>
+		<button id="esc" onclick="esc()"> 返回</button>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script type="text/javascript">
+	function success(){
+		var num = $("#num").text();
+		$.ajax({
+			url:"/index/"+num,
+			success:function(data){
+				$(".parents").html(data);
+			}
+		})
+	};
+	function esc(){
+		window.location.href="http://www.baidu.com";
+	}
+</script>
+</html>
